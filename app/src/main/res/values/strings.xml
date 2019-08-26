@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MyMvp</string>
+    <string name="user_manager">用户管理</string>
+    <string name="totol_number">共计：</string>
+    <string name="user_id">用户ID：</string>
+    <string name="user_name">用户名称：</string>
+    <string name="user_department">所属部门：</string>
+    <string name="user_phone">电话号码：</string>
+</resources>
