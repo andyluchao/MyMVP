@@ -12,6 +12,10 @@ import java.util.Map;
 
 import okhttp3.Request;
 
+/**
+ * A basic class for IBaseModel, which uses IHttpClient to communicate with server, and holds data's list
+ * @param <T>
+ */
 public class BaseModel<T> implements IBaseModel<T>{
     protected String TAG;
     private ArrayList<T>  mList;

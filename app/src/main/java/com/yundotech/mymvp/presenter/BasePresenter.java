@@ -44,20 +44,33 @@ abstract public class BasePresenter<IView extends IBaseContract.IBaseView>
         this.mModelMap = new HashMap<>();
     }
 
+    /**
+     * add model to presenter, sub-class of BasePresenter should call it in the constructor.<br/>
+     * Note: each sub-class of BaseModel should be added only once.
+     * @param model the model instance to add
+     * @return the key of 'model', call getModel(key) function with this key to get certain model.
+     */
     protected Class addModel(IBaseModel model) {
         Class key = model.getClass();
         mModelMap.put(key, model);
         return key;
     }
 
-    protected void removeModel(Class type) {
-        mModelMap.remove(type);
+    /**
+     * to remove a model by its key
+     * @param key the key of model
+     */
+    protected void removeModel(Class key) {
+        mModelMap.remove(key);
     }
 
     protected IBaseModel getModel(Class classType) {
         return mModelMap.get(classType);
     }
 
+    /**
+     * @param context the activity's context passing to presenter while fragment is attached to activity
+     */
     @Override
     public void onAttach(Context context) {
         this.mContext = context;
@@ -145,7 +158,21 @@ abstract public class BasePresenter<IView extends IBaseContract.IBaseView>
     }
 
     @Override
-    public boolean createData(Object one) {
+    public boolean onSaveListener(Object one, boolean isNew) {
+        if (isNew) {
+            return createData(one);
+        }
+        else {
+            return modifyData(one);
+        }
+    }
+
+    @Override
+    public boolean onDeleteListener(Object one) {
+        return deleteData(one);
+    }
+
+    private boolean createData(Object one) {
         Type dataType = one.getClass();
         for (IBaseModel model : this.mModelMap.values()) {
             if (dataType == model.getDataType()) {
@@ -155,8 +182,7 @@ abstract public class BasePresenter<IView extends IBaseContract.IBaseView>
         return false;
     }
 
-    @Override
-    public boolean modifyData(Object one) {
+    private boolean modifyData(Object one) {
         Type dataType = one.getClass();
         for (IBaseModel model : this.mModelMap.values()) {
             if (dataType == model.getDataType()) {
@@ -166,8 +192,7 @@ abstract public class BasePresenter<IView extends IBaseContract.IBaseView>
         return false;
     }
 
-    @Override
-    public boolean deleteData(Object one) {
+    private boolean deleteData(Object one) {
         Type dataType = one.getClass();
         for (IBaseModel model : this.mModelMap.values()) {
             if (dataType == model.getDataType()) {

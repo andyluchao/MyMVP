@@ -51,14 +51,14 @@ public class UserMgrPresenter extends BasePresenter<IUserMgrView<ComUIType, ComW
             UserInfoModel userInfoModel = (UserInfoModel)model;
             mUserList = userInfoModel.getList();
             if (mMyView != null && eventType == ModelEventType.LIST) {
-                mMyView.notifyUpdateUI(ComUIType.UNIQUE_LIST);
+                mMyView.doUpdateUI(ComUIType.UNIQUE_LIST);
             }
         }
         else if (model instanceof DictDepartmentModel) {
             DictDepartmentModel ddModel = (DictDepartmentModel)model;
             mDepartments = ddModel.getList();
             if (mMyView != null && eventType == ModelEventType.LIST) {
-                mMyView.notifyUpdateUI(ComUIType.UNIQUE_LIST);
+                mMyView.doUpdateUI(ComUIType.UNIQUE_LIST);
             }
         }
     }

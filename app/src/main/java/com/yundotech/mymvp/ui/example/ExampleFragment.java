@@ -17,7 +17,8 @@ import com.yundotech.mymvp.data.ComUIType;
 import com.yundotech.mymvp.data.ComWarningType;
 import com.yundotech.mymvp.view.BaseFragmentView;
 
-public class ExampleFragment extends BaseFragmentView<IUserMgrPresenter, ComUIType, ComWarningType> implements IUserMgrView<ComUIType, ComWarningType>{
+public class ExampleFragment extends BaseFragmentView<IUserMgrPresenter, ComUIType, ComWarningType>
+        implements IUserMgrView<ComUIType, ComWarningType>{
     private UserListAdapter mListAdapter;
     private TextView mTotalNumberView;
 
@@ -55,12 +56,7 @@ public class ExampleFragment extends BaseFragmentView<IUserMgrPresenter, ComUITy
     }
 
     @Override
-    public Object getUIContent(ComUIType uiType) {
-        return null;
-    }
-
-    @Override
-    public void notifyUpdateUI(ComUIType uiType) {
+    public void doUpdateUI(ComUIType uiType) {
         if (uiType == ComUIType.UNIQUE_LIST) {
             if (mListAdapter != null) {
                 mListAdapter.setDataList(mPresenter.getUserList());
